@@ -1,18 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+// import { Counter } from './features/counter/Counter';
+import { Vehicle } from "./features/vehicle/Vehicle";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
+        <h1 className="App-title">HSN / TSN</h1>
+        {false && <img src={logo} className="App-logo" alt="logo" />}
+        <Vehicle />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Made with <code>&#8258;</code> by Castro.
         </p>
-        <span>
+        <p>
           <span>Learn </span>
           <a
             className="App-link"
@@ -49,7 +51,7 @@ function App() {
           >
             React Redux
           </a>
-        </span>
+        </p>
       </header>
     </div>
   );
