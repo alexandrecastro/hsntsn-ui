@@ -1,7 +1,30 @@
-import { get } from "./client";
-import { Manufacturer, Model, Vehicle } from "../app/domain";
+import { get } from "../../api/client";
 
 const BASE_PATH = "/hsn-tsn";
+
+// DOMAIN
+
+export interface Manufacturer {
+  name: string;
+  logo: string;
+}
+
+export interface Model {
+  name: string;
+}
+
+export interface Vehicle {
+  hsn: string;
+  tsn: string;
+  name: string;
+  body: string;
+  fuel: string;
+  engineDisplacement: number;
+  enginePowerInKW: number;
+  enginePowerInHP: number;
+}
+
+// REQUESTS
 
 export async function getManufacturers(): Promise<Manufacturer[]> {
   return get<Manufacturer[]>(`${BASE_PATH}/manufacturers`);

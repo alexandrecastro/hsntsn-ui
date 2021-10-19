@@ -1,11 +1,13 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
+const APPLICATION_JSON = "application/json";
+
 function buildAxiosInstance(): AxiosInstance {
   return axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "http://localhost:8080", // TODO process.env.API_URL,
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: APPLICATION_JSON,
+      "Content-Type": APPLICATION_JSON,
     },
   });
 }
