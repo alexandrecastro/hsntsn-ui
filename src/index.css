@@ -4,7 +4,13 @@
 body {
   margin: 0;
   background-color: rgba(112, 76, 182, 0.1);
-  font-family: 'Russo One', 'Oxanium', 'Segoe UI', 'Roboto', 'Ubuntu', 'Helvetica Neue', sans-serif;
+  font-family: 'Oxanium', 'Segoe UI', 'Roboto', 'Ubuntu', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }

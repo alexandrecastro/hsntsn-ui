@@ -96,6 +96,13 @@ export const searchSlice = createSlice({
       .addCase(fetchVehicles.fulfilled, (state, action) => {
         state.status = "IDLE";
         state.vehicles = action.payload;
+      })
+      .addCase(fetchVehicle.pending, (state) => {
+        state.status = "LOADING";
+      })
+      .addCase(fetchVehicle.fulfilled, (state, action) => {
+        state.status = "IDLE";
+        state.selectedVehicle = action.payload;
       });
   },
 });
@@ -112,5 +119,8 @@ export const selectManufacturers = (state: RootState) =>
 export const selectModels = (state: RootState) => state.search.models;
 
 export const selectVehicles = (state: RootState) => state.search.vehicles;
+
+export const selectSelectedVehicle = (state: RootState) =>
+  state.search.selectedVehicle;
 
 export default searchSlice.reducer;
