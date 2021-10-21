@@ -17,7 +17,7 @@ export interface SearchState {
   manufacturers: Manufacturer[];
   models: Model[];
   vehicles: Vehicle[];
-  selectedVehicle?: Vehicle;
+  selectedVehicle: Vehicle | undefined;
 }
 
 const initialState: SearchState = {

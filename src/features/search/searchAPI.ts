@@ -14,6 +14,8 @@ export interface Model {
 }
 
 export interface Vehicle {
+  manufacturer: string;
+  manufacturerLogo: string;
   hsn: string;
   tsn: string;
   name: string;

@@ -11,7 +11,7 @@ import {
   selectSelectedVehicle,
   selectVehicles,
 } from "./searchSlice";
-import styles from "./Search.module.css";
+import "./Search.sass";
 import { Manufacturer, Model, Vehicle } from "./searchAPI";
 
 const VIEW_MANUFACTURER = "VIEW_MANUFACTURER";
@@ -67,28 +67,26 @@ export function Search() {
     dispatch(chooseVehicle(value));
   };
 
+  useEffect(() => {
+    const searchVehicle = function () {
+      if (hsn.length === 4 && tsn.length === 3) {
+        dispatch(
+          fetchVehicle({
+            hsn,
+            tsn,
+          })
+        );
+      }
+    };
+    searchVehicle();
+  }, [dispatch, hsn, tsn]);
+
   const onChangeHsn = function (value: string) {
     setHsn(value);
-    if (value.length === 4 && tsn.length === 3) {
-      dispatch(
-        fetchVehicle({
-          hsn: value,
-          tsn,
-        })
-      );
-    }
   };
 
   const onChangeTsn = function (value: string) {
     setTsn(value);
-    if (hsn.length === 4 && value.length === 3) {
-      dispatch(
-        fetchVehicle({
-          hsn,
-          tsn: value,
-        })
-      );
-    }
   };
 
   const onSelectSearchMode = function (
@@ -109,32 +107,32 @@ export function Search() {
   };
 
   const format = function (vehicle: Vehicle) {
-    return `${vehicle.name} • ${vehicle.body} • ${vehicle.fuel} • (${vehicle.enginePowerInKW} KW / ${vehicle.enginePowerInHP} PS) • HSN/TSN: ${vehicle.hsn}/${vehicle.tsn}`;
+    return `${vehicle.manufacturer} • ${vehicle.name} • ${vehicle.body} • ${vehicle.fuel} • (${vehicle.enginePowerInKW} KW / ${vehicle.enginePowerInHP} PS) • HSN/TSN: ${vehicle.hsn}/${vehicle.tsn}`;
   };
 
   const renderManufacturerList = () => {
     return (
       <div>
-        <div className={styles.column}>
+        <div className="column">
           <input
-            className={styles.input}
+            className="input"
             value={manufacturerQuery}
             placeholder="Manufacturer"
             onChange={(e) => setManufacturerQuery(e.target.value)}
           />
         </div>
-        <div className={styles.column}>
+        <div className="column">
           {manufacturers &&
             manufacturers
               .filter((item) => contains(item.name, manufacturerQuery))
               .map((item, index) => (
                 <button
                   key={`manufacturer_${index}`}
-                  className={styles.button}
+                  className="button"
                   onClick={() => onSelectManufacturer(item)}
                 >
-                  <div className={styles.label}>{item.name}</div>
-                  <div className={styles.arrowForward}>&nbsp;</div>
+                  <div className="label">{item.name}</div>
+                  <div className="arrow-forward">&nbsp;</div>
                 </button>
               ))}
         </div>
@@ -145,26 +143,26 @@ export function Search() {
   const renderModelList = () => {
     return (
       <div>
-        <div className={styles.column}>
+        <div className="column">
           <input
-            className={styles.input}
+            className="input"
             value={modelQuery}
             placeholder="Model"
             onChange={(e) => setModelQuery(e.target.value)}
           />
         </div>
-        <div className={styles.column}>
+        <div className="column">
           {models &&
             models
               .filter((item) => contains(item.name, modelQuery))
               .map((item, index) => (
                 <button
                   key={`model_${index}`}
-                  className={styles.button}
+                  className="button"
                   onClick={() => onSelectModel(item)}
                 >
-                  <div className={styles.label}>{item.name}</div>
-                  <div className={styles.arrowForward}>&nbsp;</div>
+                  <div className="label">{item.name}</div>
+                  <div className="arrow-forward">&nbsp;</div>
                 </button>
               ))}
         </div>
@@ -175,25 +173,25 @@ export function Search() {
   const renderVehicleList = () => {
     return (
       <div>
-        <div className={styles.column}>
+        <div className="column">
           <input
-            className={styles.input}
+            className="input"
             value={vehicleQuery}
             placeholder="Vehicle"
             onChange={(e) => setVehicleQuery(e.target.value)}
           />
         </div>
-        <div className={styles.column}>
+        <div className="column">
           {vehicles &&
             vehicles
               .filter((item) => contains(item.name, vehicleQuery))
               .map((item, index) => (
                 <button
                   key={`vehicle_${index}`}
-                  className={styles.button}
+                  className="button"
                   onClick={() => onSelectVehicle(item)}
                 >
-                  <div className={styles.label}>{item.name}</div>
+                  <div className="label">{item.name}</div>
                 </button>
               ))}
         </div>
@@ -202,35 +200,47 @@ export function Search() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className="container">
       {selectedVehicle && (
-        <div className={styles.card}>{format(selectedVehicle)}</div>
+        <div className="card">
+          <img
+            className="manufacturer-logo"
+            src={`./manufacturers/${selectedVehicle?.manufacturerLogo}.svg`}
+          />
+          {format(selectedVehicle)}
+        </div>
       )}
-      <div className={styles.row}>
+      <div className="row">
         <button
-          className={styles.button}
+          className={
+            searchMode === SEARCH_MODE_HSN_TSN ? "button active" : "button"
+          }
           onClick={() => onSelectSearchMode(SEARCH_MODE_HSN_TSN)}
         >
-          <div className={styles.label}>HSN / TSN</div>
+          <div className="label">HSN / TSN</div>
         </button>
         <button
-          className={styles.button}
+          className={
+            searchMode === SEARCH_MODE_MANUFACTURER_MODEL
+              ? "button active"
+              : "button"
+          }
           onClick={() => onSelectSearchMode(SEARCH_MODE_MANUFACTURER_MODEL)}
         >
-          <div className={styles.label}>MANUFACTURER / MODEL</div>
+          <div className="label">MANUFACTURER / MODEL</div>
         </button>
       </div>
       {searchMode === SEARCH_MODE_HSN_TSN && (
-        <div className={styles.row}>
+        <div className="row">
           <input
-            className={styles.input}
+            className="input"
             value={hsn}
             placeholder="HSN"
             maxLength={4}
             onChange={(e) => onChangeHsn(e.target.value)}
           />
           <input
-            className={styles.input}
+            className="input"
             value={tsn}
             placeholder="TSN"
             maxLength={3}
@@ -245,12 +255,9 @@ export function Search() {
           {viewMode === VIEW_VEHICLE && renderVehicleList()}
           {viewMode !== VIEW_MANUFACTURER && (
             <div>
-              <button
-                className={styles.button + " " + styles.link}
-                onClick={() => goBack()}
-              >
-                <div className={styles.arrowBack}>&nbsp;</div>
-                <div className={styles.label}>Back</div>
+              <button className="button link" onClick={() => goBack()}>
+                <div className="arrow-back">&nbsp;</div>
+                <div className="label">Back</div>
               </button>
             </div>
           )}
