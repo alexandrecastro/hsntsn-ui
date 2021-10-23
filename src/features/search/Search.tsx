@@ -110,6 +110,24 @@ export function Search() {
     return `${vehicle.manufacturer} • ${vehicle.name} • ${vehicle.body} • ${vehicle.fuel} • (${vehicle.enginePowerInKW} KW / ${vehicle.enginePowerInHP} PS) • HSN/TSN: ${vehicle.hsn}/${vehicle.tsn}`;
   };
 
+  const renderCard = (vehicle: Vehicle) => {
+    return (
+      <div className="card">
+        <img
+          className="manufacturer-logo"
+          src={`./manufacturers/${selectedVehicle?.manufacturerLogo}.svg`}
+        />
+        <div className="details">
+          <div>{vehicle.manufacturer}</div>
+          <div className="name">{vehicle.name}</div>
+          <div className="type">{`${vehicle.body} • ${vehicle.fuel}`}</div>
+          <div className="power">{`${vehicle.enginePowerInKW} KW / ${vehicle.enginePowerInHP} PS`}</div>
+          <div className="hsn-tsn">{`HSN/TSN: ${vehicle.hsn}/${vehicle.tsn}`}</div>
+        </div>
+      </div>
+    );
+  };
+
   const renderManufacturerList = () => {
     return (
       <div>
@@ -201,15 +219,7 @@ export function Search() {
 
   return (
     <div className="container">
-      {selectedVehicle && (
-        <div className="card">
-          <img
-            className="manufacturer-logo"
-            src={`./manufacturers/${selectedVehicle?.manufacturerLogo}.svg`}
-          />
-          {format(selectedVehicle)}
-        </div>
-      )}
+      {selectedVehicle && renderCard(selectedVehicle)}
       <div className="row">
         <button
           className={

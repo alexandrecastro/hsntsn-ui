@@ -1,6 +1,6 @@
 import React from "react";
 import { Search } from "./features/search/Search";
-import "./App.css";
+import "./App.sass";
 
 function App() {
   return (

@@ -79,13 +79,14 @@
       flex: 1
       margin-left: 8px
   .button
-    border-right: 0
     border-radius: 0
+    border-right: 0
+    border-bottom: 4px solid $button-border-color
     color: $button-color-inactive
     background-color: $button-background-color-inactive
     text-align: center
     font-weight: 800
-    font-size: 16px
+    font-size: calc(8px + 2vmin)
     height: 72px
     width: 100%
     transition: 0.5s color
@@ -94,16 +95,15 @@
     &.active
       color: $button-color
       background-color: $button-background-color
+      border-bottom-color: $button-color
     &:hover
       color: $button-color
     &:first-of-type
       border-left: 1px solid $button-border-color
       border-top-left-radius: $button-border-radius
-      border-bottom-left-radius: $button-border-radius
     &:last-of-type
       border-right: 1px solid $button-border-color
       border-top-right-radius: $button-border-radius
-      border-bottom-right-radius: $button-border-radius
 
 .column
   display: flex
@@ -131,7 +131,18 @@
   color: $button-color
   background-color: $button-background-color
   font-size: 24px
-
-.manufacturer-logo
-  max-width: 50px
-  max-height: 20px
+  text-align: left
+  .manufacturer-logo
+    position: absolute
+    right: 32px
+    top: 32px
+    max-width: 100px
+    max-height: 40px
+  .name
+    color: #005792
+  .hsn-tsn
+    font-size: 16px
+    color: $button-color-inactive
+  .type,
+  .power
+    font-size: 16px
