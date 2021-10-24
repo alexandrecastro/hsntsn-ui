@@ -106,17 +106,15 @@ export function Search() {
     return !query || value.toUpperCase().indexOf(query.toUpperCase()) !== -1;
   };
 
-  const format = function (vehicle: Vehicle) {
-    return `${vehicle.manufacturer} • ${vehicle.name} • ${vehicle.body} • ${vehicle.fuel} • (${vehicle.enginePowerInKW} KW / ${vehicle.enginePowerInHP} PS) • HSN/TSN: ${vehicle.hsn}/${vehicle.tsn}`;
-  };
-
   const renderCard = (vehicle: Vehicle) => {
     return (
       <div className="card">
-        <img
-          className="manufacturer-logo"
-          src={`./manufacturers/${selectedVehicle?.manufacturerLogo}.svg`}
-        />
+        <div className="manufacturer-logo">
+          <img
+            src={`./manufacturers/${selectedVehicle?.manufacturerLogo}.svg`}
+            alt="Oops..."
+          />
+        </div>
         <div className="details">
           <div>{vehicle.manufacturer}</div>
           <div className="name">{vehicle.name}</div>
@@ -131,18 +129,22 @@ export function Search() {
   const renderManufacturerList = () => {
     return (
       <div>
-        <div className="column">
+        <div className="row-input">
           <input
             className="input"
             value={manufacturerQuery}
             placeholder="Manufacturer"
             onChange={(e) => setManufacturerQuery(e.target.value)}
           />
+          <span className="x-button" onClick={() => setManufacturerQuery("")}>
+            &nbsp;
+          </span>
         </div>
         <div className="column">
           {manufacturers &&
             manufacturers
               .filter((item) => contains(item.name, manufacturerQuery))
+              .sort((e1, e2) => e1.name.localeCompare(e2.name))
               .map((item, index) => (
                 <button
                   key={`manufacturer_${index}`}
@@ -161,18 +163,22 @@ export function Search() {
   const renderModelList = () => {
     return (
       <div>
-        <div className="column">
+        <div className="row-input">
           <input
             className="input"
             value={modelQuery}
             placeholder="Model"
             onChange={(e) => setModelQuery(e.target.value)}
           />
+          <span className="x-button" onClick={() => setModelQuery("")}>
+            &nbsp;
+          </span>
         </div>
         <div className="column">
           {models &&
             models
               .filter((item) => contains(item.name, modelQuery))
+              .sort((e1, e2) => e1.name.localeCompare(e2.name))
               .map((item, index) => (
                 <button
                   key={`model_${index}`}
@@ -191,18 +197,22 @@ export function Search() {
   const renderVehicleList = () => {
     return (
       <div>
-        <div className="column">
+        <div className="row-input">
           <input
             className="input"
             value={vehicleQuery}
             placeholder="Vehicle"
             onChange={(e) => setVehicleQuery(e.target.value)}
           />
+          <span className="x-button" onClick={() => setVehicleQuery("")}>
+            &nbsp;
+          </span>
         </div>
         <div className="column">
           {vehicles &&
             vehicles
               .filter((item) => contains(item.name, vehicleQuery))
+              .sort((e1, e2) => e1.name.localeCompare(e2.name))
               .map((item, index) => (
                 <button
                   key={`vehicle_${index}`}
@@ -256,6 +266,12 @@ export function Search() {
             maxLength={3}
             onChange={(e) => onChangeTsn(e.target.value)}
           />
+          <span className="x-button" onClick={() => setHsn("")}>
+            &nbsp;
+          </span>
+          <span className="x-button" onClick={() => setTsn("")}>
+            &nbsp;
+          </span>
         </div>
       )}
       {searchMode === SEARCH_MODE_MANUFACTURER_MODEL && (
