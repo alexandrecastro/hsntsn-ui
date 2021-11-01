@@ -110,10 +110,14 @@ export function Search() {
     return (
       <div className="card">
         <div className="manufacturer-logo">
-          <img
-            src={`./manufacturers/${selectedVehicle?.manufacturerLogo}.svg`}
-            alt="Oops..."
-          />
+          <div
+            className="card-logo"
+            style={{
+              backgroundImage: `url(./manufacturers/${selectedVehicle?.manufacturerLogo}.svg)`,
+            }}
+          >
+            &nbsp;
+          </div>
         </div>
         <div className="details">
           <div>{vehicle.manufacturer}</div>
