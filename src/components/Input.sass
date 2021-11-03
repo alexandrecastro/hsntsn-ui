@@ -1,0 +1,29 @@
+@import '../styles/variables.sass'
+
+.input
+  width: 100%
+  margin-bottom: $spacing
+  &-field
+    width: 100%
+    padding: $spacing
+    color: $color-7
+    border: 1px solid $color-3
+    border-radius: $border-radius
+    font-size: $font-size
+    font-family: $font-family
+    text-transform: uppercase
+    transition: 0.5s border-color
+    appearance: none
+    outline: none
+    &:focus
+      border-color: $color-6
+  &-reset
+    position: absolute
+    margin-top: 16px
+    margin-left: -40px
+    height: 24px
+    width: 24px
+    cursor: pointer
+    background-image: url("data:image/svg+xml,#{$svg-x-1}")
+    &:hover
+      background-image: url("data:image/svg+xml,#{$svg-x-2}")

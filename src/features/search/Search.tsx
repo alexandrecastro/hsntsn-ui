@@ -12,6 +12,8 @@ import {
   selectVehicles,
 } from "./searchSlice";
 import "./Search.sass";
+import Card from "../../components/Card";
+import Input from "../../components/Input";
 import { Manufacturer, Model, Vehicle } from "./searchAPI";
 
 const VIEW_MANUFACTURER = "VIEW_MANUFACTURER";
@@ -106,44 +108,14 @@ export function Search() {
     return !query || value.toUpperCase().indexOf(query.toUpperCase()) !== -1;
   };
 
-  const renderCard = (vehicle: Vehicle) => {
-    return (
-      <div className="card">
-        <div className="manufacturer-logo">
-          <div
-            className="card-logo"
-            style={{
-              backgroundImage: `url(./manufacturers/${selectedVehicle?.manufacturerLogo}.svg)`,
-            }}
-          >
-            &nbsp;
-          </div>
-        </div>
-        <div className="details">
-          <div>{vehicle.manufacturer}</div>
-          <div className="name">{vehicle.name}</div>
-          <div className="type">{`${vehicle.body} • ${vehicle.fuel}`}</div>
-          <div className="power">{`${vehicle.enginePowerInKW} KW / ${vehicle.enginePowerInHP} PS`}</div>
-          <div className="hsn-tsn">{`HSN/TSN: ${vehicle.hsn}/${vehicle.tsn}`}</div>
-        </div>
-      </div>
-    );
-  };
-
   const renderManufacturerList = () => {
     return (
       <div>
-        <div className="row-input">
-          <input
-            className="input"
-            value={manufacturerQuery}
-            placeholder="Manufacturer"
-            onChange={(e) => setManufacturerQuery(e.target.value)}
-          />
-          <span className="x-button" onClick={() => setManufacturerQuery("")}>
-            &nbsp;
-          </span>
-        </div>
+        <Input
+          value={manufacturerQuery}
+          placeholder="Manufacturer"
+          handleChange={setManufacturerQuery}
+        />
         <div className="column">
           {manufacturers &&
             manufacturers
@@ -233,7 +205,8 @@ export function Search() {
 
   return (
     <div className="container">
-      {selectedVehicle && renderCard(selectedVehicle)}
+      {false && <div className="loading" />}
+      {selectedVehicle && <Card vehicle={selectedVehicle} />}
       <div className="row">
         <button
           className={
@@ -256,19 +229,17 @@ export function Search() {
       </div>
       {searchMode === SEARCH_MODE_HSN_TSN && (
         <div className="row">
-          <input
-            className="input"
+          <Input
             value={hsn}
             placeholder="HSN"
+            handleChange={onChangeHsn}
             maxLength={4}
-            onChange={(e) => onChangeHsn(e.target.value)}
           />
-          <input
-            className="input"
+          <Input
             value={tsn}
             placeholder="TSN"
+            handleChange={onChangeTsn}
             maxLength={3}
-            onChange={(e) => onChangeTsn(e.target.value)}
           />
           <span className="x-button" onClick={() => setHsn("")}>
             &nbsp;

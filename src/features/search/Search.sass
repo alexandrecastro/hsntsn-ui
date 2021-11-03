@@ -6,20 +6,6 @@
   padding: $spacing
   max-width: 800px
 
-.input
-  appearance: none
-  outline: none
-  padding: $spacing
-  border: 1px solid $input-border-color
-  border-radius: 8px
-  font-size: 16px
-  font-family: $font-family
-  text-transform: uppercase
-  transition: 0.5s border-color
-  width: 100%
-  &:focus
-    border-color: $input-border-color-active
-
 .button
   display: flex
   padding: 8px 16px
@@ -121,53 +107,6 @@
       border-bottom: 1px solid $border-color
       border-bottom-left-radius: $border-radius
       border-bottom-right-radius: $border-radius
-
-.card
-  padding: $spacing
-  margin-bottom: $spacing
-  border: 1px solid $color
-  border-radius: $border-radius
-  color: $color
-  background-color: $button-background-color
-  font-size: 24px
-  text-align: left
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z' fill='%23f0f2f5' fill-opacity='0.5' fill-rule='evenodd'/%3E%3C/svg%3E")
-  .manufacturer-logo
-    position: absolute
-    right: 32px
-    top: 32px
-    text-align: right
-  .name
-    color: $active-color
-  .hsn-tsn
-    font-size: 16px
-    color: $inactive-color
-  .type,
-  .power
-    font-size: 16px
-
-.card-logo
-  display: inline-block
-  background-size: contain
-  background-position: top right
-  background-repeat: no-repeat
-  width: 128px
-  height: 72px
-  @media (max-width: $mobile-width)
-    width: 96px
-    height: 64px
-
-.row-input
-  margin-bottom: $spacing
-.x-button
-  position: absolute
-  margin-top: 16px
-  margin-left: -40px
-  height: 24px
-  width: 24px
-  cursor: pointer
-  background-image: url("data:image/svg+xml,%3Csvg focusable='false' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' fill='%23CCD0D5'%3E%3C/path%3E%3C/svg%3E")
-  color: $active-color
 
 .loading
   position: fixed
