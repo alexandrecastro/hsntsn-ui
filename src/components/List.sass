@@ -1,0 +1,45 @@
+@import '../styles/variables.sass'
+
+.list
+  display: flex
+  flex-direction: column
+  width: 100%
+  margin-bottom: $spacing
+  &-button
+    display: flex
+    flex: 1 0
+    padding: 8px 16px
+    border: 1px solid $color-3
+    border-bottom: 0
+    border-radius: 0
+    color: $color-6
+    background-color: $color-1
+    font-size: 24px
+    font-family: $font-family
+    text-align: left
+    align-items: center
+    appearance: none
+    outline: none
+    cursor: pointer
+    &:hover,
+    &:focus,
+    &:active
+      color: $color-1
+      background-color: $color-6
+    &:first-of-type
+      border-top: 1px solid $color-3
+      border-top-left-radius: $border-radius
+      border-top-right-radius: $border-radius
+    &:last-of-type
+      border-bottom: 1px solid $color-3
+      border-bottom-left-radius: $border-radius
+      border-bottom-right-radius: $border-radius
+    &-label
+      flex: 1
+    &-arrow
+      width: 10px
+      height: 10px
+      border: solid
+      border-width: 0 2px 2px 0
+      align-self: center
+      transform: rotate(-45deg)

@@ -14,6 +14,7 @@ import {
 import "./Search.sass";
 import Card from "../../components/Card";
 import Input from "../../components/Input";
+import List from "../../components/List";
 import { Manufacturer, Model, Vehicle } from "./searchAPI";
 
 const VIEW_MANUFACTURER = "VIEW_MANUFACTURER";
@@ -32,10 +33,6 @@ export function Search() {
   const [searchMode, setSearchMode] = useState<string>(SEARCH_MODE_HSN_TSN);
   const [viewMode, setViewMode] = useState<string>(VIEW_MANUFACTURER);
   const [selectedManufacturer, setSelectedManufacturer] = useState<string>("");
-  const [selectedModel, setSelectedModel] = useState<string>("");
-  const [manufacturerQuery, setManufacturerQuery] = useState<string>("");
-  const [modelQuery, setModelQuery] = useState<string>("");
-  const [vehicleQuery, setVehicleQuery] = useState<string>("");
   const [hsn, setHsn] = useState<string>("");
   const [tsn, setTsn] = useState<string>("");
 
@@ -47,15 +44,15 @@ export function Search() {
     }
   });
 
-  const onSelectManufacturer = function (manufacturer: Manufacturer) {
+  const onSelectManufacturer = function (
+    manufacturer: Manufacturer | { name: string }
+  ) {
     setSelectedManufacturer(manufacturer?.name);
-    setSelectedModel("");
     dispatch(fetchModels({ manufacturerName: manufacturer?.name }));
     setViewMode(VIEW_MODEL);
   };
 
-  const onSelectModel = function (model: Model) {
-    setSelectedModel(model?.name);
+  const onSelectModel = function (model: Model | { name: string }) {
     dispatch(
       fetchVehicles({
         manufacturerName: selectedManufacturer,
@@ -65,7 +62,7 @@ export function Search() {
     setViewMode(VIEW_VEHICLE);
   };
 
-  const onSelectVehicle = function (value: Vehicle) {
+  const onSelectVehicle = function (value: Vehicle | any) {
     dispatch(chooseVehicle(value));
   };
 
@@ -98,109 +95,7 @@ export function Search() {
   };
 
   const goBack = function () {
-    setManufacturerQuery("");
-    setModelQuery("");
-    setVehicleQuery("");
     setViewMode(viewMode === VIEW_VEHICLE ? VIEW_MODEL : VIEW_MANUFACTURER);
-  };
-
-  const contains = function (value: string, query: string) {
-    return !query || value.toUpperCase().indexOf(query.toUpperCase()) !== -1;
-  };
-
-  const renderManufacturerList = () => {
-    return (
-      <div>
-        <Input
-          value={manufacturerQuery}
-          placeholder="Manufacturer"
-          handleChange={setManufacturerQuery}
-        />
-        <div className="column">
-          {manufacturers &&
-            manufacturers
-              .filter((item) => contains(item.name, manufacturerQuery))
-              .sort((e1, e2) => e1.name.localeCompare(e2.name))
-              .map((item, index) => (
-                <button
-                  key={`manufacturer_${index}`}
-                  className="button"
-                  onClick={() => onSelectManufacturer(item)}
-                >
-                  <div className="label">{item.name}</div>
-                  <div className="arrow-forward">&nbsp;</div>
-                </button>
-              ))}
-        </div>
-      </div>
-    );
-  };
-
-  const renderModelList = () => {
-    return (
-      <div>
-        <div className="row-input">
-          <input
-            className="input"
-            value={modelQuery}
-            placeholder="Model"
-            onChange={(e) => setModelQuery(e.target.value)}
-          />
-          <span className="x-button" onClick={() => setModelQuery("")}>
-            &nbsp;
-          </span>
-        </div>
-        <div className="column">
-          {models &&
-            models
-              .filter((item) => contains(item.name, modelQuery))
-              .sort((e1, e2) => e1.name.localeCompare(e2.name))
-              .map((item, index) => (
-                <button
-                  key={`model_${index}`}
-                  className="button"
-                  onClick={() => onSelectModel(item)}
-                >
-                  <div className="label">{item.name}</div>
-                  <div className="arrow-forward">&nbsp;</div>
-                </button>
-              ))}
-        </div>
-      </div>
-    );
-  };
-
-  const renderVehicleList = () => {
-    return (
-      <div>
-        <div className="row-input">
-          <input
-            className="input"
-            value={vehicleQuery}
-            placeholder="Vehicle"
-            onChange={(e) => setVehicleQuery(e.target.value)}
-          />
-          <span className="x-button" onClick={() => setVehicleQuery("")}>
-            &nbsp;
-          </span>
-        </div>
-        <div className="column">
-          {vehicles &&
-            vehicles
-              .filter((item) => contains(item.name, vehicleQuery))
-              .sort((e1, e2) => e1.name.localeCompare(e2.name))
-              .map((item, index) => (
-                <button
-                  key={`vehicle_${index}`}
-                  className="button"
-                  onClick={() => onSelectVehicle(item)}
-                >
-                  <div className="label">{item.name}</div>
-                </button>
-              ))}
-        </div>
-      </div>
-    );
   };
 
   return (
@@ -251,9 +146,36 @@ export function Search() {
       )}
       {searchMode === SEARCH_MODE_MANUFACTURER_MODEL && (
         <div>
-          {viewMode === VIEW_MANUFACTURER && renderManufacturerList()}
-          {viewMode === VIEW_MODEL && renderModelList()}
-          {viewMode === VIEW_VEHICLE && renderVehicleList()}
+          {viewMode === VIEW_MANUFACTURER && (
+            <List
+              id="manufacturer"
+              items={manufacturers}
+              handleSelect={onSelectManufacturer}
+              drilldown={true}
+              search={true}
+              placeholder="Manufacturer"
+            />
+          )}
+          {viewMode === VIEW_MODEL && (
+            <List
+              id="model"
+              items={models}
+              handleSelect={onSelectModel}
+              drilldown={true}
+              search={true}
+              placeholder="Model"
+            />
+          )}
+          {viewMode === VIEW_VEHICLE && (
+            <List
+              id="vehicle"
+              items={vehicles}
+              handleSelect={onSelectVehicle}
+              drilldown={false}
+              search={true}
+              placeholder="Vehicle"
+            />
+          )}
           {viewMode !== VIEW_MANUFACTURER && (
             <div>
               <button className="button link" onClick={() => goBack()}>
