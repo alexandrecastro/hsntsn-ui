@@ -47,5 +47,5 @@ export async function getVehicleByHsnAndTsn(
   hsn: string,
   tsn: string
 ): Promise<Vehicle> {
-  return get<Vehicle>(`${BASE_PATH}/${hsn}/${tsn}`);
+  return get<Vehicle>(`${BASE_PATH}/${hsn.toUpperCase()}/${tsn.toUpperCase()}`);
 }

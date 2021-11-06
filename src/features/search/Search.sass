@@ -6,53 +6,6 @@
   padding: $spacing
   max-width: 800px
 
-.button
-  display: flex
-  padding: 8px 16px
-  appearance: none
-  outline: none
-  color: $button-color
-  background-color: $button-background-color
-  border: 1px solid $button-border-color
-  border-radius: 8px
-  font-size: 24px
-  font-family: $font-family
-  align-items: center
-  text-align: left
-  cursor: pointer
-  &:hover,
-  &.button:focus,
-  &.button:active
-    color: $button-background-color
-    background-color: $button-color
-  &.link
-    margin: 0
-    padding: 6px
-    background: none
-    border: none
-    &:hover,
-    &:focus,
-    &:active
-      background: none
-      border: none
-      color: $button-color
-  .arrow-forward
-    border: solid
-    border-width: 0 2px 2px 0
-    width: 10px
-    height: 10px
-    align-self: center
-    transform: rotate(-45deg)
-  .arrow-back
-    border: solid
-    border-width: 2px 0 0 2px
-    width: 10px
-    height: 10px
-    align-self: center
-    transform: rotate(-45deg)
-  .label
-    flex: 1
-
 .row
   display: flex
   flex-direction: row
@@ -65,10 +18,18 @@
       flex: 1
       margin-left: 8px
   .button
+    display: flex
+    padding: 8px 16px
+    appearance: none
+    outline: none
+    border: 1px solid $color-3
+    font-family: $font-family
+    align-items: center
+    cursor: pointer
     border-radius: 0
     border-right: 0
-    color: $button-inactive-color
-    background-color: $button-inactive-background-color
+    color: $color-3
+    background-color: transparent
     text-align: center
     font-weight: 800
     font-size: calc(8px + 2vmin)
@@ -78,17 +39,18 @@
     &:focus,
     &:active,
     &.active
-      color: $button-color
-      background-color: $button-background-color
-      border-bottom-color: $button-border-color
+      color: $color-7
+      background-color: $color-8
     &:hover
-      color: $color
+      color: $color-7
     &:first-of-type
-      border-left: 1px solid $button-border-color
+      border-left: 1px solid $color-3
       border-top-left-radius: $border-radius
     &:last-of-type
-      border-right: 1px solid $button-border-color
+      border-right: 1px solid $color-3
       border-top-right-radius: $border-radius
+    .label
+      flex: 1
 
 .loading
   position: fixed

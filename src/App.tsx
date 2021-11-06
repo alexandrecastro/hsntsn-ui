@@ -6,12 +6,10 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1 className="app-title">HSN / TSN</h1>
+        <h1 className="app-title">&#8258; HSN / TSN &#8258;</h1>
       </header>
       <Search />
-      <p className="app-footer">
-        Made with <code>&#8258;</code> by Castro
-      </p>
+      <div className="app-footer">Made with &#8258; by Castro</div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ export interface ListProps {
   id: string;
   items: { name: string }[];
   handleSelect: (value: { name: string }) => void;
+  handleBack?: () => void;
   drilldown?: boolean;
   search?: boolean;
   placeholder?: string;
@@ -15,6 +16,7 @@ const List = ({
   id,
   items,
   handleSelect,
+  handleBack,
   drilldown,
   search,
   placeholder,
@@ -29,6 +31,14 @@ const List = ({
 
   return (
     <div>
+      {handleBack && (
+        <div>
+          <button className="list-back-button" onClick={() => handleBack()}>
+            <div className="list-back-button-arrow">&nbsp;</div>
+            <div className="list-back-button-label">Back</div>
+          </button>
+        </div>
+      )}
       {search && (
         <Input
           value={query}
@@ -52,6 +62,14 @@ const List = ({
               </button>
             ))}
       </div>
+      {handleBack && (
+        <div>
+          <button className="list-back-button" onClick={() => handleBack()}>
+            <div className="list-back-button-arrow">&nbsp;</div>
+            <div className="list-back-button-label">Back</div>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

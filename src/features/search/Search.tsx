@@ -9,6 +9,7 @@ import {
   selectManufacturers,
   selectModels,
   selectSelectedVehicle,
+  selectStatus,
   selectVehicles,
 } from "./searchSlice";
 import "./Search.sass";
@@ -25,6 +26,7 @@ const SEARCH_MODE_HSN_TSN = "SEARCH_MODE_HSN_TSN";
 const SEARCH_MODE_MANUFACTURER_MODEL = "SEARCH_MODE_MANUFACTURER_MODEL";
 
 export function Search() {
+  const status = useAppSelector(selectStatus);
   const manufacturers = useAppSelector(selectManufacturers);
   const models = useAppSelector(selectModels);
   const vehicles = useAppSelector(selectVehicles);
@@ -100,7 +102,7 @@ export function Search() {
 
   return (
     <div className="container">
-      {false && <div className="loading" />}
+      {status === "LOADING" && <div className="loading" />}
       {selectedVehicle && <Card vehicle={selectedVehicle} />}
       <div className="row">
         <button
@@ -136,12 +138,6 @@ export function Search() {
             handleChange={onChangeTsn}
             maxLength={3}
           />
-          <span className="x-button" onClick={() => setHsn("")}>
-            &nbsp;
-          </span>
-          <span className="x-button" onClick={() => setTsn("")}>
-            &nbsp;
-          </span>
         </div>
       )}
       {searchMode === SEARCH_MODE_MANUFACTURER_MODEL && (
@@ -161,6 +157,7 @@ export function Search() {
               id="model"
               items={models}
               handleSelect={onSelectModel}
+              handleBack={goBack}
               drilldown={true}
               search={true}
               placeholder="Model"
@@ -171,18 +168,11 @@ export function Search() {
               id="vehicle"
               items={vehicles}
               handleSelect={onSelectVehicle}
+              handleBack={goBack}
               drilldown={false}
               search={true}
               placeholder="Vehicle"
             />
-          )}
-          {viewMode !== VIEW_MANUFACTURER && (
-            <div>
-              <button className="button link" onClick={() => goBack()}>
-                <div className="arrow-back">&nbsp;</div>
-                <div className="label">Back</div>
-              </button>
-            </div>
           )}
         </div>
       )}

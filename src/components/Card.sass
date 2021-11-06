@@ -23,11 +23,16 @@
     @media (max-width: $mobile-width)
       width: 96px
       height: 64px
-  &-details-name
-    color: $color-7
-  &-details-hsn-tsn
-    font-size: $font-size
-    color: $color-4
-  &-details-type,
-  &-details-power
-    font-size: $font-size
+  &-details
+    padding-right: 134px
+    @media (max-width: $mobile-width)
+      padding-right: 102px
+    &-name
+      color: $color-7
+    &-hsn-tsn
+      font-size: $font-size
+      color: $color-3
+    &-manufacturer,
+    &-type,
+    &-power
+      font-size: $font-size

@@ -18,7 +18,7 @@ const Card = ({ vehicle }: CardProps) => {
         &nbsp;
       </div>
       <div className="card-details">
-        <div>{vehicle?.manufacturer}</div>
+        <div className="card-details-manufacturer">{vehicle?.manufacturer}</div>
         <div className="card-details-name">{vehicle?.name}</div>
         <div className="card-details-type">{`${vehicle?.body} • ${vehicle?.fuel}`}</div>
         <div className="card-details-power">{`${vehicle?.enginePowerInKW} KW / ${vehicle?.enginePowerInHP} PS`}</div>

@@ -113,6 +113,8 @@ export const { chooseVehicle } = searchSlice.actions;
 
 // SELECTORS
 
+export const selectStatus = (state: RootState) => state.search.status;
+
 export const selectManufacturers = (state: RootState) =>
   state.search.manufacturers;
 
