@@ -9,7 +9,9 @@ function App() {
         <h1 className="app-title">&#8258; HSN / TSN &#8258;</h1>
       </header>
       <Search />
-      <div className="app-footer">Made with &#8258; by Castro</div>
+      <div className="app-footer">
+        &#8258; <a href="https://kastro.io">kastro.io</a> &#8258;
+      </div>
     </div>
   );
 }
